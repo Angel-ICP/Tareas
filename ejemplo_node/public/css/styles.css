@@ -1,0 +1,15 @@
+body{
+    background-color: #f6faf8;
+}
+.container{
+    text-align: center;
+}
+img{
+    width: 100px;
+    
+}
+.table img{
+    width: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}

@@ -1,24 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boton con Modal en Node.js</title>
-    <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/style.css">
-</head>
+    <title>Gestion de proveedores</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+
+
 <body>
-    <div class="container nt-5">
+    <!-- <div class="container mt-5">
         <h1>Boton con Modal en Node.js</h1>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
             Abrir
         </button>
+    </div> -->
+
+    <div class="container mt-5">
+        <h1 class="text-center">Gestion de proveedores</h1>
+        <div class="d-flex justify-content-end mb-3">
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addProviderModal">Añadir Proveedor</button>
+        </div>
+        <table class="table table-border">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Id</th>
+                    <th>Nombres</th>
+                    <th>Ap Paterno</th>
+                    <th>Ap Materno</th>
+                    <th>Correos</th>
+                    <th>Telefonos</th>
+                    <th>Domicilio</th>
+                    <th>Foto</th>
+                    <th>Operaciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Juan</td>
+                    <td>Perez</td>
+                    <td>Gomez</td>
+                    <td>juanperes@gmail.com</td>
+                    <td>9841538438</td>
+                    <td>Calle Conocida</td>
+                    <td><img src="https://media.tenor.com/ESnRabRRGGwAAAAe/perrito-abogado.png" alt="nose"></td>
+                    <td>
+                        <button class="btn btn-primary btn-sn">Editar</button>
+                        <button class="btn btn-primary btn-sn">Borrar</button>
+                        
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
-    <%- include('modal')%>
+    <!-- aqui colocaremos el codigo de la ventana modal -->
 
-    <script src="/lib/jquery/jquery.min.js"></script>
-    <script src="/lib/bootstrap/js/bootstrap.bundke.min.js"></script>
-    <script src="/js/script.js"></script>
+    <div class="modal fade" id="addProviderModal" tabindex="-1" role="dialog" area-labelledby="addProviderModal" aria-label="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addProviderModallabel">Agregar proveedor</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="providerName">Nombres:</label>
+                            <input type="text" class="form-control" id="providerName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="providerMiddleName">Ap Paterno:</label>
+                            <input type="text" class="form-control" id="providerMiddleName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="providerLastName">Ap Materno:</label>
+                            <input type="text" class="form-control" id="providerLastName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="providerEmail">Correo:</label>
+                            <input type="email" class="form-control" id="providerEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="providerPhone">Telefono:</label>
+                            <input type="number" class="form-control" id="providerPhone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="providerAddress">Domicilio:</label>
+                            <input type="text" class="form-control" id="providerAddress" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="providerPhoto">Foto:</label>
+                            <input type="image" class="form-control" id="providerPhoto" required>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary">Agregar</button>
+                            <button class="btn btn-primary">Editar</button>
+                            <button class="btn btn-primary">Eliminar</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
+
 </html>
