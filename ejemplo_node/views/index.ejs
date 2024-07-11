@@ -37,21 +37,23 @@
                 </tr>
             </thead>
             <tbody>
+                <% providers.forEach(providers => { %>
                 <tr>
-                    <td>1</td>
-                    <td>Juan</td>
-                    <td>Perez</td>
-                    <td>Gomez</td>
-                    <td>juanperes@gmail.com</td>
-                    <td>9841538438</td>
-                    <td>Calle Conocida</td>
-                    <td><img src="https://media.tenor.com/ESnRabRRGGwAAAAe/perrito-abogado.png" alt="nose"></td>
+                    <td><% providers.id %></td>
+                    <td><% providers.name %></td>
+                    <td><% providers.middleName %></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                     <td>
                         <button class="btn btn-primary btn-sn">Editar</button>
                         <button class="btn btn-primary btn-sn">Borrar</button>
                         
                     </td>
                 </tr>
+                <% }) %>
             </tbody>
         </table>
     </div>
