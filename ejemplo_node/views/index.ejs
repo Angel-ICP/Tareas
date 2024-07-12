@@ -1,124 +1,155 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestion de proveedores</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/styles.css">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Proveedores</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
 
 <body>
-    <!-- <div class="container mt-5">
-        <h1>Boton con Modal en Node.js</h1>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-            Abrir
-        </button>
-    </div> -->
-
-    <div class="container mt-5">
-        <h1 class="text-center">Gestion de proveedores</h1>
-        <div class="d-flex justify-content-end mb-3">
-            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addProviderModal">Añadir Proveedor</button>
-        </div>
-        <table class="table table-border">
-            <thead class="thead-dark">
-                <tr>
-                    <th>Id</th>
-                    <th>Nombres</th>
-                    <th>Ap Paterno</th>
-                    <th>Ap Materno</th>
-                    <th>Correos</th>
-                    <th>Telefonos</th>
-                    <th>Domicilio</th>
-                    <th>Foto</th>
-                    <th>Operaciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% providers.forEach(providers => { %>
-                <tr>
-                    <td><% providers.id %></td>
-                    <td><% providers.name %></td>
-                    <td><% providers.middleName %></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <button class="btn btn-primary btn-sn">Editar</button>
-                        <button class="btn btn-primary btn-sn">Borrar</button>
-                        
-                    </td>
-                </tr>
-                <% }) %>
-            </tbody>
-        </table>
+  <div class="container mt-5">
+    <h1 class="text-center">Gestión de Proveedores</h1>
+    <div class="d-flex justify-content-end mb-3">
+      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addProviderModal">Añadir Proveedor</button>
     </div>
-
-    <!-- aqui colocaremos el codigo de la ventana modal -->
-
-    <div class="modal fade" id="addProviderModal" tabindex="-1" role="dialog" area-labelledby="addProviderModal" aria-label="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
+    <table class="table table-border">
+      <thead class="thead-dark">
+        <tr>
+          <th>Id</th>
+          <th>Nombres</th>
+          <th>Ap Paterno</th>
+          <th>Ap Materno</th>
+          <th>Correo</th>
+          <th>Teléfono</th>
+          <th>Domicilio</th>
+          <th>Foto</th>
+          <th>Operaciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% providers.forEach(provider => { %>
+          <tr>
+            <td><%= provider.id %></td>
+            <td><%= provider.name %></td>
+            <td><%= provider.middleName %></td>
+            <td><%= provider.lastName %></td>
+            <td><%= provider.email %></td>
+            <td><%= provider.phone %></td>
+            <td><%= provider.address %></td>
+            <td><img src="<%= provider.photo %>" alt="foto de <%= provider.name %>" style="width: 100px;"></td>
+            <td>
+              <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editProviderModal<%= provider.id %>">Editar</button>
+              <a href="/delete/<%= provider.id %>" onclick="deleteProvider( provider.id )"  class="btn btn-danger btn-sm">Borrar</a>
+            </td>
+          </tr>
+          <!-- Modal para editar proveedor -->
+          <div class="modal fade" id="editProviderModal<%= provider.id %>" tabindex="-1" role="dialog" aria-labelledby="editProviderModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addProviderModallabel">Agregar proveedor</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                  <h5 class="modal-title" id="editProviderModalLabel">Editar Proveedor</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
                 </div>
                 <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="providerName">Nombres:</label>
-                            <input type="text" class="form-control" id="providerName" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="providerMiddleName">Ap Paterno:</label>
-                            <input type="text" class="form-control" id="providerMiddleName" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="providerLastName">Ap Materno:</label>
-                            <input type="text" class="form-control" id="providerLastName" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="providerEmail">Correo:</label>
-                            <input type="email" class="form-control" id="providerEmail" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="providerPhone">Telefono:</label>
-                            <input type="number" class="form-control" id="providerPhone" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="providerAddress">Domicilio:</label>
-                            <input type="text" class="form-control" id="providerAddress" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="providerPhoto">Foto:</label>
-                            <input type="image" class="form-control" id="providerPhoto" required>
-                        </div>
-                        <div class="form-group">
-                            <button class="btn btn-primary">Agregar</button>
-                            <button class="btn btn-primary">Editar</button>
-                            <button class="btn btn-primary">Eliminar</button>
-                        </div>
-                    </form>
+                  <form action="/edit/<%= provider.id %>" method="POST">
+                    <div class="form-group">
+                      <label for="providerName">Nombres:</label>
+                      <input type="text" class="form-control" id="providerName" name="name" value="<%= provider.name %>" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="providerMiddleName">Apellido Paterno:</label>
+                      <input type="text" class="form-control" id="providerMiddleName" name="middleName" value="<%= provider.middleName %>" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="providerLastName">Apellido Materno:</label>
+                      <input type="text" class="form-control" id="providerLastName" name="lastName" value="<%= provider.lastName %>" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="providerEmail">Correo:</label>
+                      <input type="email" class="form-control" id="providerEmail" name="email" value="<%= provider.email %>" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="providerPhone">Teléfono:</label>
+                      <input type="tel" class="form-control" id="providerPhone" name="phone" value="<%= provider.phone %>" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="providerAddress">Domicilio:</label>
+                      <input type="text" class="form-control" id="providerAddress" name="address" value="<%= provider.address %>" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="providerPhoto">Foto:</label>
+                      <input type="url" class="form-control" id="providerPhoto" name="photo" value="<%= provider.photo %>" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                  </form>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                 </div>
+              </div>
             </div>
+          </div>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Modal para agregar proveedor -->
+  <div class="modal fade" id="addProviderModal" tabindex="-1" role="dialog" aria-labelledby="addProviderModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addProviderModalLabel">Agregar Proveedor</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
+        <div class="modal-body">
+          <form action="/add" method="POST">
+            <div class="form-group">
+              <label for="providerName">Nombres:</label>
+              <input type="text" class="form-control" id="providerName" name="name" required>
+            </div>
+            <div class="form-group">
+              <label for="providerMiddleName">Apellido Paterno:</label>
+              <input type="text" class="form-control" id="providerMiddleName" name="middleName" required>
+            </div>
+            <div class="form-group">
+              <label for="providerLastName">Apellido Materno:</label>
+              <input type="text" class="form-control" id="providerLastName" name="lastName" required>
+            </div>
+            <div class="form-group">
+              <label for="providerEmail">Correo:</label>
+              <input type="email" class="form-control" id="providerEmail" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="providerPhone">Teléfono:</label>
+              <input type="tel" class="form-control" id="providerPhone" name="phone" required>
+            </div>
+            <div class="form-group">
+              <label for="providerAddress">Domicilio:</label>
+              <input type="text" class="form-control" id="providerAddress" name="address" required>
+            </div>
+            <div class="form-group">
+              <label for="providerPhoto">Foto:</label>
+              <input type="url" class="form-control" id="providerPhoto" name="photo" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Agregar</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
     </div>
+  </div>
 
-
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
-
 </html>

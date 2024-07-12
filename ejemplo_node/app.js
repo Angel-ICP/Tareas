@@ -1,23 +1,21 @@
-// app.js
 const express = require('express');
 const path = require('path');
-
 const app = express();
-const port = 3000;
+const providersRoutes = require('./routes/providers');
+const db = require('./db');
 
-// Configurar archivos estáticos
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Configurar motor de plantillas EJS
-app.set('views', path.join(__dirname, 'views'));
+// Configurar EJS como motor de plantillas
 app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
-// Ruta principal
-app.get('/', (req, res) => {
-  res.render('index');
-});
+// Middleware para parsear cuerpos de solicitudes
+app.use(express.urlencoded({ extended: true }));
 
-// Iniciar servidor
-app.listen(port, () => {
-  console.log(`Servidor Node.js escuchando en http://localhost:${port}`);
+// Usar rutas de proveedores
+app.use('/', providersRoutes);
+
+// Escuchar en el puerto 3000
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Servidor Node.js escuchando en http://localhost:${PORT}"`);
 });

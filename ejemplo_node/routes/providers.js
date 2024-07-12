@@ -1,16 +1,17 @@
-//archivo para manejar o controlar las rutas de la aplicacion
 const express = require('express');
 const router = express.Router();
 const providerController = require('../controllers/providerController');
 
-
+// Ruta para obtener todos los proveedores
 router.get('/', providerController.getAllProviders);
 
+// Ruta para añadir un nuevo proveedor
 router.post('/add', providerController.addProvider);
 
-router.post('/update/:id', providerController.updateProvider);
+// Ruta para editar un proveedor existente
+router.post('/edit/:id', providerController.editProvider);
 
-router.post('/delete/:id', providerController.deleteProvider);
+// Ruta para borrar un proveedor
+router.get('/delete/:id', providerController.deleteProvider);
 
 module.exports = router;
-
